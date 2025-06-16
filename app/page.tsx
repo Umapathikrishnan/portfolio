@@ -1,38 +1,79 @@
-import Image from "next/image";
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { AuroraText } from "@/components/magicui/aurora-text";
+"use client";
+
+import { motion, easeOut } from "framer-motion";
+import Card from "@/components/card/Card";
+import ContactSection from "@/components/contact/ContactSection";
+import Footer from "@/components/footer/Footer";
+import HomeSection from "@/components/homeSection/HomeSection";
+import ProjectsSection from "@/components/projects/Projects";
+import SkillsSection from "@/components/skillSection/Skills";
 
 export default function Home() {
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: easeOut },
+    },
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col items-center justify-center gap-8">
-        <div className="flex items-center justify-center">
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={100}
-          height={100}
-          className="rounded-full"
-        />
+    <main className="flex flex-col lg:flex-row min-h-screen w-full">
+      {/* Left Sticky Card Section (hidden on mobile) */}
+      <div className="hidden lg:flex w-full lg:w-[30%] h-screen sticky top-0 items-center justify-center">
+        <Card />
       </div>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">Hi, I'm Umapathi K <AuroraText colors={["#AAFFA9","#11FFBD"]} speed={3} >Full-Stack Web Developer </AuroraText></h1>
-        <p className="mt-4 text-sm">Specialized in building robust, scalable web applications with modern JavaScript frameworks.</p>
-      </div>
-       
-      <div className="flex items-center justify-center">
-        <a
-          href="/Download_Umapathi_K_CV.pdf"
-          download="Umapathi_K_CV.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
+
+      {/* Right Scrollable Content Section */}
+      <div className="w-full lg:w-[70%] p-4 sm:p-6 lg:p-8 space-y-10 overflow-y-auto">
+        <motion.section
+          id="home"
+          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
         >
-         <InteractiveHoverButton className="px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600 transition-colors duration-300">
-          Download CV
-        </InteractiveHoverButton>
-        </a>
+          <HomeSection />
+        </motion.section>
+
+        <motion.section
+          id="skills"
+          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <SkillsSection />
+        </motion.section>
+
+        <motion.section
+          id="projects"
+          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <ProjectsSection />
+        </motion.section>
+
+        <motion.section
+          id="contact"
+          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <ContactSection />
+        </motion.section>
+
+        {/* Optional Footer */}
+        <Footer />
       </div>
-        </main>
-    </div>
+    </main>
   );
 }

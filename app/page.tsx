@@ -1,78 +1,49 @@
 "use client";
 
-import { motion, easeOut } from "framer-motion";
 import Card from "@/components/card/Card";
 import ContactSection from "@/components/contact/ContactSection";
-import Footer from "@/components/footer/Footer";
 import HomeSection from "@/components/homeSection/HomeSection";
 import ProjectsSection from "@/components/projects/Projects";
 import SkillsSection from "@/components/skillSection/Skills";
+import { motion, useScroll } from "framer-motion";
 
 export default function Home() {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: easeOut },
-    },
-  };
-
+  const { scrollYProgress } = useScroll()
   return (
     <main className="flex flex-col lg:flex-row min-h-screen w-full">
+      <motion.div
+        id="scroll-indicator"
+        style={{
+          scaleX: scrollYProgress,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 5,
+          originX: 0,
+          backgroundColor: "#8FABF4",
+          zIndex: 9999,
+        }}
+      />
       {/* Left Sticky Card Section (hidden on mobile) */}
-      <div className="hidden lg:flex w-full lg:w-[30%] h-screen sticky top-0 items-center justify-center">
+      <motion.div className="hidden lg:flex w-full lg:w-[30%] h-screen sticky top-0 items-center justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
         <Card />
-      </div>
+      </motion.div>
 
       {/* Right Scrollable Content Section */}
       <div className="w-full lg:w-[70%] p-4 sm:p-6 lg:p-8 space-y-10 overflow-y-auto">
-        <motion.section
-          id="home"
-          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        <section className="min-h-screen rounded-xl p-4 sm:p-6 text-white" id="home">
           <HomeSection />
-        </motion.section>
-
-        <motion.section
-          id="skills"
-          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        </section>
+        <section className="min-h-screen rounded-xl p-4 sm:p-6 text-white" id="skills">
           <SkillsSection />
-        </motion.section>
-
-        <motion.section
-          id="projects"
-          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        </section>
+        <section className="min-h-screen rounded-xl p-4 sm:p-6 text-white" id="projects">
           <ProjectsSection />
-        </motion.section>
-
-        <motion.section
-          id="contact"
-          className="min-h-screen rounded-xl p-4 sm:p-6 text-white"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        </section>
+        <section className="min-h-screen rounded-xl p-4 sm:p-6 text-white" id="contact">
           <ContactSection />
-        </motion.section>
-
-        {/* Optional Footer */}
-        <Footer />
+        </section>
       </div>
     </main>
   );

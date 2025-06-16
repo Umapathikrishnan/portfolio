@@ -4,37 +4,50 @@ import { projects } from "@/data/projectData";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Marquee } from "@/components/magicui/marquee";
+import { motion } from "framer-motion";
 
 export default function ProjectsSection() {
   return (
     <section className="w-full sm:px-8 py-16 text-left space-y-8">
       {/* Heading */}
  <div className="mb-12 space-y-4 text-center sm:text-left">
-  <h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold text-white/35 tracking-[0.2em] uppercase leading-none">
+  <motion.h2 className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold text-white/35 tracking-[0.2em] uppercase leading-none" initial={{ transform: "translateY(20px)", opacity: 0 }}
+    animate={{ transform: "translateY(0)", opacity: 1 }}
+    transition={{ duration: 0.6, delay: 0 }}>
     Featured
-  </h2>
-  <h2 className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold text-white tracking-[0.2em] leading-none uppercase">
+  </motion.h2>
+  <motion.h2 className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[64px] font-bold text-white tracking-[0.2em] leading-none uppercase" initial={{ transform: "translateY(20px)", opacity: 0 }}
+    animate={{ transform: "translateY(0)", opacity: 1 }}
+    transition={{ duration: 0.6, delay: 0.2 }}>
     Projects
-  </h2>
-  <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[25px] font-extralight text-white max-w-3xl mx-auto sm:mx-0">
+  </motion.h2>
+  <motion.p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[25px] font-extralight text-white max-w-3xl mx-auto sm:mx-0" initial={{ transform: "translateY(20px)", opacity: 0 }}
+    animate={{ transform: "translateY(0)", opacity: 1 }}
+    transition={{ duration: 0.6, delay: 0.4 }}>
     Things I've built out of curiosity and passion
-  </p>
+  </motion.p>
 </div>
 
 
       {/* Projects Marquee or Scroll */}
       {projects.length > 4 ? (
-        <Marquee pauseOnHover className="[--duration:50s] sm:[--duration:30s]">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
-        </Marquee>
+        <motion.div initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}>
+          <Marquee pauseOnHover className="[--duration:50s] sm:[--duration:30s]">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} {...project} />
+            ))}
+          </Marquee>
+        </motion.div>
       ) : (
-        <div className="flex w-full overflow-x-auto space-x-6 no-scrollbar pb-4">
+        <motion.div className="flex w-full overflow-x-auto space-x-6 no-scrollbar pb-4" initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}>
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />
           ))}
-        </div>
+        </motion.div>
       )}
     </section>
   );

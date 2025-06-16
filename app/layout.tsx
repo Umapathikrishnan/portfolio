@@ -4,6 +4,7 @@ import "./globals.css";
 
 import MenuBar from "@/components/menuBar/MenuBar";
 import Footer from "@/components/footer/Footer";
+import ScrollToTop from "@/components/scrollToTop/scrollToTop";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -12,8 +13,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Your Portfolio",
-  description: "Your personal developer portfolio",
+  title: "Umapathi K | Portfolio",
+  description: "Full Stack Developer Portfolio",
 };
 
 export default function RootLayout({
@@ -24,7 +25,8 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-sans antialiased bg-background text-foreground`}>
         <MenuBar />
         {children}
-          <Footer/>
+        <ScrollToTop />
+        <Footer />
       </body>
     </html>
   );

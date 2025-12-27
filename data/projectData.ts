@@ -79,6 +79,7 @@ export const projects = [
       "/assets/html.svg",
       "/assets/css.svg",
     ],
-  }
+  },
+
   // Add more projects here...
 ];
